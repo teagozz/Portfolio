@@ -1,0 +1,466 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Thiago Dias | Software Engineer</title>
+  <link rel="icon" type="image/png" href="img/avatar.png">
+
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&family=Space+Grotesk:wght@300;500;700&display=swap" rel="stylesheet">
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+
+  <style>
+    :root {
+      --accent-gold: #D4AF37;
+      --deep-bg: #020c0f;
+    }
+
+    body {
+      margin: 0;
+      overflow-x: hidden;
+      background-color: var(--deep-bg);
+      color: #e2e8f0;
+      font-family: 'Outfit', sans-serif;
+    }
+
+    #canvas-container {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -1;
+      opacity: 0;
+      transition: opacity 1.5s ease;
+    }
+
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-track { background: #020c0f; }
+    ::-webkit-scrollbar-thumb { background: #1f3d3d; border-radius: 3px; }
+    ::-webkit-scrollbar-thumb:hover { background: var(--accent-gold); }
+
+    .font-display { font-family: 'Space Grotesk', sans-serif; }
+    .text-gold { color: var(--accent-gold); }
+
+
+    .glass-panel {
+      background: rgba(4, 20, 24, 0.65);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+    }
+
+    .glass-card {
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(255, 255, 255, 0.05);
+      transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    }
+
+    .glass-card:hover {
+      background: rgba(255, 255, 255, 0.07);
+      border-color: var(--accent-gold);
+      transform: translateY(-5px);
+      box-shadow: 0 10px 40px -10px rgba(212, 175, 55, 0.15);
+    }
+
+    .tech-tag {
+      transition: all 0.3s ease;
+    }
+    .tech-tag:hover {
+      transform: scale(1.1);
+      box-shadow: 0 0 10px var(--accent-gold);
+      border-color: var(--accent-gold);
+      background-color: rgba(212, 175, 55, 0.1);
+      color: white;
+    }
+
+    .animate-float {
+      animation: float 6s ease-in-out infinite;
+    }
+
+    @keyframes float {
+      0% { transform: translateY(0px); }
+      50% { transform: translateY(-20px); }
+      100% { transform: translateY(0px); }
+    }
+  </style>
+</head>
+<body class="antialiased selection:bg-yellow-500/30 selection:text-white">
+
+<div id="canvas-container"></div>
+
+<nav class="fixed w-full z-50 top-0 px-6 py-4 transition-all duration-300" id="navbar">
+  <div class="max-w-7xl mx-auto flex justify-between items-center glass-panel rounded-full px-6 py-3">
+    <a href="#" class="text-xl font-display font-bold tracking-tighter hover:text-gold transition-colors">
+      diasjthiago<span class="text-gold">.</span>
+    </a>
+    <div class="hidden md:flex gap-8 text-sm font-medium text-gray-300">
+      <a href="#about" class="hover:text-white transition-colors">Sobre</a>
+      <a href="#skills" class="hover:text-white transition-colors">Skills</a>
+      <a href="#projects" class="hover:text-white transition-colors">Projetos</a>
+      <a href="#experience" class="hover:text-white transition-colors">Jornada</a>
+    </div>
+    <a href="#contact" class="bg-white/10 hover:bg-white/20 px-5 py-2 rounded-full text-xs font-bold uppercase tracking-widest border border-white/10 transition-all">
+      Contato
+    </a>
+  </div>
+</nav>
+
+<main class="relative z-10">
+
+  <section id="about" class="min-h-screen flex items-center justify-center px-6 pt-20">
+    <div class="max-w-6xl w-full grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+      <div class="order-2 lg:order-1 space-y-8">
+        <div class="inline-block px-3 py-1 rounded-full border border-yellow-500/30 bg-yellow-500/10 text-green-500 text-xs font-mono mb-4">
+          ● Disponível para Projetos & Oportunidades
+        </div>
+        <h1 class="text-5xl md:text-7xl font-display font-bold leading-tight">
+          Thiago <br>
+          <span class="text-transparent bg-clip-text bg-gradient-to-r from-white via-gray-200 to-gray-500">D Jardim</span>
+          <span class="block text-2xl md:text-3xl font-light text-gold mt-2 italic font-serif">Com Alma Digital.</span>
+        </h1>
+
+        <p class="text-gray-400 text-lg max-w-lg leading-relaxed glass-panel p-6 rounded-2xl border-l-4 border-yellow-600">
+          Opa! Sou <strong class="text-white">Thiago Dias Jardim</strong>. Atuo com foco em desenvolvimento Full Stack, infraestrutura e
+          uso de Inteligência Artificial para maximizar eficiência, sempre buscando criar soluções que não apenas funcionem, mas fluam.
+        </p>
+
+        <div class="flex gap-4 pt-4">
+          <a href="#projects" class="px-8 py-4 bg-white text-black font-bold rounded-lg hover:bg-gray-200 transition-colors shadow-[0_0_20px_rgba(255,255,255,0.3)]">
+            Ver Projetos
+          </a>
+          <a href="#contact" class="px-8 py-4 glass-card rounded-lg font-bold hover:text-gold transition-colors">
+            Fale Comigo
+          </a>
+        </div>
+      </div>
+
+      <div class="order-1 lg:order-2 flex justify-center lg:justify-end relative">
+        <div class="absolute inset-0 bg-gradient-to-tr from-emerald-500/20 to-yellow-500/20 blur-[100px] rounded-full"></div>
+        <div class="relative w-72 h-72 md:w-96 md:h-96 animate-float">
+          <img src="img/avatar.png"
+               alt="Thiago Dias Jardim"
+               class="w-full h-full object-contain drop-shadow-2xl hover:scale-105 transition-all duration-500">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="skills" class="py-32 px-6">
+    <div class="max-w-7xl mx-auto">
+      <div class="mb-16">
+        <h2 class="text-4xl font-display font-bold mb-4">Arsenal <span class="text-gold">Técnico</span></h2>
+        <div class="h-1 w-20 bg-gold"></div>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6" id="skills-container">
+      </div>
+    </div>
+  </section>
+
+  <section id="projects" class="py-20 px-6 relative">
+    <div class="max-w-7xl mx-auto">
+      <div class="flex flex-col md:flex-row justify-between items-end mb-16 gap-4">
+        <div>
+          <span class="text-gold font-mono text-sm tracking-widest uppercase">Portfolio</span>
+          <h2 class="text-4xl md:text-5xl font-display font-bold mt-2">Projetos Selecionados</h2>
+        </div>
+        <p class="text-gray-400 text-sm max-w-xs text-right">Uma mistura de código acadêmico, soluções reais e experimentos.</p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8" id="projects-grid">
+      </div>
+    </div>
+  </section>
+
+  <section id="experience" class="py-32 px-6 bg-black/20 backdrop-blur-sm">
+    <div class="max-w-4xl mx-auto">
+      <h2 class="text-4xl font-display font-bold mb-12 text-center">Jornada <span class="text-gold">Profissional</span></h2>
+
+      <div class="relative border-l border-gray-800 ml-4 md:ml-0 space-y-16" id="timeline-container">
+      </div>
+    </div>
+  </section>
+
+  <section id="contact" class="py-24 px-6 relative overflow-hidden">
+    <div class="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent z-0"></div>
+
+    <div class="max-w-3xl mx-auto text-center relative z-10">
+      <h2 class="text-5xl md:text-7xl font-display font-bold mb-8">Vamos trabalhar <br><span class="text-gold">juntos?</span></h2>
+      <p class="text-xl text-gray-400 mb-12">Estou aberto a novas oportunidades!</p>
+
+      <div class="flex flex-wrap justify-center gap-6 items-center">
+        <a href="mailto:forbusinessthiago@gmail.com" class="px-10 py-4 bg-[#D4AF37] text-black font-bold text-lg rounded-full hover:bg-white hover:scale-105 transition-all shadow-[0_0_20px_rgba(212,175,55,0.4)]">
+          Enviar Email
+        </a>
+        <a href="https://www.linkedin.com/in/thiagodjardim/" target="_blank" class="px-10 py-4 glass-panel border border-white/20 rounded-full hover:bg-white/10 hover:border-white transition-all text-white font-medium">
+          LinkedIn
+        </a>
+        <a href="https://github.com/teagozz" target="_blank" class="px-10 py-4 glass-panel border border-white/20 rounded-full hover:bg-white/10 hover:border-white transition-all text-white font-medium">
+          GitHub
+        </a>
+      </div>
+
+      <footer class="mt-24 pt-8 border-t border-white/5 text-gray-500 font-mono text-xs">
+        <p>&copy;2025 diasjthiago</p>
+      </footer>
+    </div>
+  </section>
+</main>
+
+<script>
+  const data = {
+    skills: [
+      { category: "Backend & Linguagens", items: ["Java (POO)", "Python", "SQL (MySQL/PostgreSQL)", "Spring Boot"] },
+      { category: "Web & Frontend", items: ["HTML5 & CSS3", "JavaScript", "Web Moderno", "Tailwind CSS"] },
+      { category: "Infraestrutura", items: ["Redes & Hardware", "Suporte N1/N2", "Sistemas SIG", "Linux"] },
+      { category: "Inovação & IA", items: ["Prompt Engineering", "LLMs p/ Code Optimization", "Git/Versionamento"] }
+    ],
+    projects: [
+      {
+        title: "Projeto HUB",
+        role: "Backend Java",
+        desc: "Sistema backend para gestão de espaços públicos (Prefeitura de Cel. Fabriciano). Foco em arquitetura limpa, regras de negócio complexas e persistência de dados.",
+        tags: ["Java", "POO", "Spring Boot", "MySQL"],
+        link: "https://github.com/mayanpas/Projeto-PI-UNILESTE"
+      },
+      {
+        title: "EdyFashion E-commerce",
+        role: "Full Stack",
+        desc: "Interface web responsiva e sistema de vitrine digital. Focado em UX/UI para facilitar navegação e scripts para interatividade.",
+        tags: ["HTML5", "CSS3", "JavaScript", "UX/UI"],
+        link: "https://github.com/teagozz/EdyFashion"
+      },
+      {
+        title: "Gestão Restaurante Univ.",
+        role: "Java Developer",
+        desc: "Sistema de gestão aplicado em contexto universitário focado em Programação Orientada a Objetos.",
+        tags: ["Java", "OOP", "Console"],
+        link: "https://github.com/teagozz/Sistema-de-Gestao-de-Restaurantes-Universitarios"
+      },
+      {
+        title: "Portfólio Web 2025",
+        role: "Frontend Criativo",
+        desc: "Este site. Centralização de competências técnicas usando tecnologias modernas de renderização 3D e estilização.",
+        tags: ["Three.js", "Tailwind", "Design"],
+        link: "https://github.com/teagozz/cv"
+      }
+    ],
+    experience: [
+      {
+        bgYear: "2025",
+        company: "Hospital Maternidade Vital Brasil",
+        role: "Técnico de Suporte TI",
+        period: "Out 2025 - Atual",
+        details: [
+          "Liderança na intermediação de doação de 27 CPUs (Sicoob), gerando economia e performance.",
+          "Suporte N1/N2 em incidentes críticos de hardware/software hospitalar.",
+          "Manutenção de redes, servidores locais e integridade de banco de dados."
+        ]
+      },
+      {
+        bgYear: "2024",
+        company: "UNILESTE",
+        role: "Bacharelado em Eng. de Software",
+        period: "Ago 2024 - Jul 2028",
+        details: [
+          "Foco em desenvolvimento Full Stack e Arquitetura de Software."
+        ]
+      },
+      {
+        bgYear: "2022",
+        company: "EdyFashion",
+        role: "Operador de Sistemas",
+        period: "Fev 2022 - Abr 2024",
+        details: [
+          "Gerenciamento total de estoque via SIG (FIFO) com 100% de precisão.",
+          "Otimização de fluxo de caixa e manutenção de base de dados ERP.",
+          "Geração de relatórios gerenciais confiáveis."
+        ]
+      },
+    ]
+  };
+
+  const skillsContainer = document.getElementById('skills-container');
+  data.skills.forEach(group => {
+    const card = document.createElement('div');
+    card.className = "glass-card p-6 rounded-2xl";
+    card.innerHTML = `
+        <h3 class="text-gold font-bold mb-4 uppercase text-xs tracking-wider border-b border-white/10 pb-2">${group.category}</h3>
+        <div class="flex flex-wrap gap-2">
+            ${group.items.map(item => `<span class="tech-tag text-sm text-gray-300 bg-white/5 border border-white/10 px-3 py-1 rounded cursor-default">${item}</span>`).join('')}
+        </div>
+    `;
+    skillsContainer.appendChild(card);
+  });
+  const projContainer = document.getElementById('projects-grid');
+  data.projects.forEach(proj => {
+    const card = document.createElement('a');
+    card.href = proj.link;
+    card.target = "_blank";
+    card.className = "glass-card p-8 rounded-2xl flex flex-col group h-full";
+    card.innerHTML = `
+        <div class="flex justify-between items-start mb-4">
+            <div class="p-3 bg-white/5 rounded-lg text-gold group-hover:bg-gold group-hover:text-black transition-colors">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" /></svg>
+            </div>
+            <span class="text-xs font-mono text-gray-500">${proj.role}</span>
+        </div>
+        <h3 class="text-2xl font-bold mb-3 text-white group-hover:text-gold transition-colors">${proj.title}</h3>
+        <p class="text-gray-400 text-sm mb-6 leading-relaxed flex-grow">${proj.desc}</p>
+        <div class="flex flex-wrap gap-2 mt-auto">
+            ${proj.tags.map(t => `<span class="tech-tag text-[10px] uppercase tracking-wider font-bold text-gray-400 border border-gold/40 px-2 py-1 rounded-md">${t}</span>`).join('')}
+        </div>
+    `;
+    projContainer.appendChild(card);
+  });
+  const timeContainer = document.getElementById('timeline-container');
+  data.experience.forEach((job) => {
+    const item = document.createElement('div');
+    item.className = "pl-8 md:pl-12 relative group";
+    item.innerHTML = `
+        <span class="absolute -left-[5px] top-2 w-3 h-3 rounded-full bg-gray-800 border border-gray-600 group-hover:bg-gold group-hover:border-gold transition-colors shadow-[0_0_10px_rgba(0,0,0,0.5)]"></span>
+
+        <div class="glass-card p-8 rounded-2xl relative overflow-hidden">
+            <div class="absolute top-0 right-0 p-4 opacity-10 text-6xl font-display font-bold text-white select-none pointer-events-none">${job.bgYear}</div>
+
+            <span class="text-gold font-mono text-xs uppercase tracking-widest mb-2 block">${job.period}</span>
+            <h3 class="text-2xl font-bold text-white mb-1">${job.role}</h3>
+            <h4 class="text-lg text-gray-400 mb-6 italic">${job.company}</h4>
+            <ul class="space-y-2">
+                ${job.details.map(d => `<li class="text-gray-400 text-sm pl-4 relative before:content-['▹'] before:absolute before:left-0 before:text-gold">${d}</li>`).join('')}
+            </ul>
+        </div>
+    `;
+    timeContainer.appendChild(item);
+  });
+
+  const initThreeJS = () => {
+    const container = document.getElementById('canvas-container');
+    const scene = new THREE.Scene();
+    scene.fog = new THREE.FogExp2(0x020c0f, 0.002);
+
+    const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+    camera.position.set(0, 15, 30);
+    camera.lookAt(0, 0, 0);
+
+    const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
+    renderer.setSize(window.innerWidth, window.innerHeight);
+    renderer.setPixelRatio(window.devicePixelRatio);
+    container.appendChild(renderer.domElement);
+
+    const ambientLight = new THREE.AmbientLight(0xffffff, 0.5);
+    scene.add(ambientLight);
+
+    const pointLight = new THREE.PointLight(0xD4AF37, 2, 50);
+    pointLight.position.set(10, 20, 10);
+    scene.add(pointLight);
+
+    const blueLight = new THREE.PointLight(0x00ffcc, 1, 50);
+    blueLight.position.set(-10, 10, -10);
+    scene.add(blueLight);
+
+    const geometry = new THREE.PlaneGeometry(120, 120, 60, 60);
+
+    const material = new THREE.MeshPhysicalMaterial({
+      color: 0x1f3d3d,
+      emissive: 0x000000,
+      roughness: 0.1,
+      metalness: 0.8,
+      reflectivity: 0.9,
+      wireframe: true,
+      side: THREE.DoubleSide
+    });
+
+    const plane = new THREE.Mesh(geometry, material);
+    plane.rotation.x = -Math.PI / 2;
+    scene.add(plane);
+
+    const count = geometry.attributes.position.count;
+    const positionAttribute = geometry.attributes.position;
+    const initialZ = [];
+
+    for (let i = 0; i < count; i++) {
+      initialZ.push(positionAttribute.getZ(i));
+    }
+
+    let time = 0;
+
+    const animate = () => {
+      requestAnimationFrame(animate);
+      time += 0.005;
+
+      for (let i = 0; i < count; i++) {
+        const x = positionAttribute.getX(i);
+        const y = positionAttribute.getY(i);
+
+        const z = initialZ[i] +
+          Math.sin(x * 0.1 + time) * 3 +
+          Math.sin(y * 0.1 + time) * 3 +
+          Math.sin((x + y) * 0.05 + time * 0.5) * 2;
+
+        positionAttribute.setZ(i, z);
+      }
+      positionAttribute.needsUpdate = true;
+
+      plane.rotation.z = Math.sin(time * 0.1) * 0.05;
+
+      renderer.render(scene, camera);
+    };
+
+    animate();
+
+    window.addEventListener('resize', () => {
+      camera.aspect = window.innerWidth / window.innerHeight;
+      camera.updateProjectionMatrix();
+      renderer.setSize(window.innerWidth, window.innerHeight);
+    });
+
+    setTimeout(() => {
+      container.style.opacity = '1';
+    }, 100);
+  };
+
+  window.addEventListener('DOMContentLoaded', () => {
+    initThreeJS();
+
+    gsap.registerPlugin(ScrollTrigger);
+
+    gsap.from("#about h1", { duration: 1.5, y: 100, opacity: 0, ease: "power4.out", delay: 0.5 });
+    gsap.from("#about p", { duration: 1.5, y: 50, opacity: 0, ease: "power4.out", delay: 0.8 });
+
+    gsap.utils.toArray('.glass-card').forEach((card, i) => {
+      gsap.from(card, {
+        scrollTrigger: {
+          trigger: card,
+          start: "top 90%",
+        },
+        y: 50,
+        opacity: 0,
+        duration: 0.8,
+        ease: "power2.out",
+        delay: i * 0.1
+      });
+    });
+
+    window.addEventListener('scroll', () => {
+      const nav = document.getElementById('navbar');
+      if(window.scrollY > 50) {
+        nav.classList.add('py-2');
+        nav.classList.remove('py-4');
+      } else {
+        nav.classList.add('py-4');
+        nav.classList.remove('py-2');
+      }
+    });
+  });
+</script>
+</body>
+</html>
