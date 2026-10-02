@@ -83,6 +83,20 @@ a:visited {
   color: var(--color-accent);
 }
 
+.projeto-links a,
+.projeto-links a:visited {
+    color: var(--color-accent);
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    transition: opacity 0.2s ease;
+}
+
+.projeto-links a:hover {
+    color: var(--color-accent-hover);
+    opacity: 0.8;
+}
+
 /* ====================== HEADER ====================== */
 
 .header {
